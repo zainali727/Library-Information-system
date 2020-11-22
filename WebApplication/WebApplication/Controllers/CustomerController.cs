@@ -1,6 +1,8 @@
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Data;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -20,11 +22,30 @@ namespace WebApplication.Controllers
             return View(customers);
         }
 
-        [HttpPost]
-        public IActionResult AddOrEdit()
+        // GET: Customer/Create
+        public IActionResult AddOrEdit(int id = 0)
         {
-            var customers = _context.Customers.ToList();
-            return View("Index", customers);
+            return View(id == 0 
+                ? new Customer() 
+                : _context.Customers.Find(id));
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddOrEdit(Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                if (customer.Id == 0)
+                    _context.Add(customer);
+                else
+                    _context.Update(customer);
+                
+                await _context.SaveChangesAsync();
+                
+                return RedirectToAction(nameof(Index));
+            }
+            return View(customer);
         }
 
         [HttpPost]
