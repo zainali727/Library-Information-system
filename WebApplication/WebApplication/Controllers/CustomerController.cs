@@ -48,11 +48,17 @@ namespace WebApplication.Controllers
             return View(customer);
         }
 
-        [HttpPost]
-        public IActionResult Delete()
+        public async Task<IActionResult> Delete(int? id)
         {
-            var customers = _context.Customers.ToList();
-            return View("Index", customers);
+            var customer = await _context.Customers.FindAsync(id);
+
+            if (customer != null)
+            {
+                _context.Customers.Remove(customer);
+                await _context.SaveChangesAsync();
+            }
+            
+            return RedirectToAction(nameof(Index));
         }
     }
 }
