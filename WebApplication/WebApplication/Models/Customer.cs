@@ -17,6 +17,5 @@ namespace WebApplication.Models
         public string  Email { get; set; }
         [Column(TypeName ="nvarchar(250)")]
         public string  Telephone { get; set; }
-        public CustomerType CustomerType { get; set; }
     }
 }

@@ -25,9 +25,6 @@
             @Html.DisplayNameFor(model => model.Telephone)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CustomerType)
-        </th>
-        <th>
             <a asp-action="AddOrEdit" class="btn btn-outline-success"><i class="far fa-plus-square"></i> Employee</a>
         </th>
     </tr>
@@ -50,9 +47,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Telephone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CustomerType)
             </td>
             <td>
                 <a asp-action="AddOrEdit" asp-route-id="@item.Id">
