@@ -13,6 +13,10 @@ namespace WebApplication.Models
         public string Lastname { get; set; }
         [Column(TypeName ="nvarchar(250)")]
         public string  Address { get; set; }
+        [Column(TypeName ="nvarchar(250)")]
+        public string  Email { get; set; }
+        [Column(TypeName ="nvarchar(250)")]
+        public string  Telephone { get; set; }
         public CustomerType CustomerType { get; set; }
     }
 }

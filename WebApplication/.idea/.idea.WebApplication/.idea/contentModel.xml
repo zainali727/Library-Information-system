@@ -26,6 +26,8 @@
           <e p="Migrations" t="Include">
             <e p="20201122145729_CreateIdentitySchema.cs" t="Include" />
             <e p="20201122145729_CreateIdentitySchema.Designer.cs" t="Include" />
+            <e p="20201122155302_Customer_new_field.cs" t="Include" />
+            <e p="20201122155302_Customer_new_field.Designer.cs" t="Include" />
             <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
           </e>
         </e>
@@ -34,7 +36,14 @@
           <e p="CustomerType.cs" t="Include" />
           <e p="ErrorViewModel.cs" t="Include" />
         </e>
-        <e p="obj" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="WebApplication.AssemblyInfo.cs" t="Include" />
+              <e p="WebApplication.RazorAssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="Pages" t="Include" />
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">

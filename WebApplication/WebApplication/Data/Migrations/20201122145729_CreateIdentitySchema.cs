@@ -55,8 +55,6 @@ namespace WebApplication.Data.Migrations
                     Firstname = table.Column<string>(type: "nvarchar(250)", nullable: true),
                     Lastname = table.Column<string>(type: "nvarchar(250)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(250)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(250)", nullable: true),
-                    Telephone = table.Column<string>(type: "nvarchar(250)", nullable: true),
                     CustomerType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
