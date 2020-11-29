@@ -22,6 +22,11 @@ namespace WebApplication.Controllers
             return View(customers);
         }
 
+        public IActionResult Show(int id)
+        {
+            return View(_context.Customers.Find(id));
+        }
+        
         // GET: Customer/Create
         public IActionResult AddOrEdit(int id = 0)
         {

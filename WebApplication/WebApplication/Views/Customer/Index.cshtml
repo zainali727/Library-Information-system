@@ -51,8 +51,11 @@
                 @Html.DisplayFor(modelItem => item.Telephone)
             </td>
             <td>
+                <a asp-action="Show" asp-route-id="@item.Id" class="btn btn-outline-success">
+                    <i class="fa fa-marker fa-lg">Show</i>
+                </a>
                 <a asp-action="AddOrEdit" asp-route-id="@item.Id" class="btn btn-outline-success">
-                    <i class="fa fa-marker fa-lg"></i>
+                    <i class="fa fa-marker fa-lg">Edit</i>
                 </a>
                 <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1" 
                    onclick="return confirm('Are you sure to delete this record?')">

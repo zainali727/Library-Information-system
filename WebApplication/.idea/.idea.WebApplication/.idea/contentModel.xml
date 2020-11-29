@@ -31,6 +31,8 @@
             <e p="20201122155302_Customer_new_field.Designer.cs" t="Include" />
             <e p="20201122161353_customer_drop_customertype.cs" t="Include" />
             <e p="20201122161353_customer_drop_customertype.Designer.cs" t="Include" />
+            <e p="20201129151819_adding_books.cs" t="Include" />
+            <e p="20201129151819_adding_books.Designer.cs" t="Include" />
             <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
           </e>
         </e>
@@ -59,10 +61,12 @@
           <e p="Books" t="Include">
             <e p="AddOrEdit.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
+            <e p="Show.cshtml" t="Include" />
           </e>
           <e p="Customer" t="Include">
             <e p="AddOrEdit.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
+            <e p="Show.cshtml" t="Include" />
           </e>
           <e p="Home" t="Include">
             <e p="Index.cshtml" t="Include" />
