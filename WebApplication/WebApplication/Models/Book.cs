@@ -30,7 +30,6 @@ namespace WebApplication.Models
         public string  PublishedDate { get; set; }
         
         [Column(TypeName ="nvarchar(250)")]
-        [NotMappedAttribute]
         public string ImageFileName { get; set; }
         
         [NotMappedAttribute]

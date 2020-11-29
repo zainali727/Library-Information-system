@@ -45,7 +45,17 @@ namespace WebApplication.Controllers
         public async Task<IActionResult> AddOrEdit(Book book)
         {
             if (ModelState.IsValid)
-            {
+            {    
+                if (book.MyImage != null)
+                {
+                    var uniqueFileName = GetUniqueFileName(book.MyImage.FileName);
+                    var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+                    var filePath = Path.Combine(uploads,uniqueFileName);
+                    book.MyImage.CopyTo(new FileStream(filePath, FileMode.Create));
+
+                    book.ImageFileName = uniqueFileName;
+                }
+                
                 if (book.Id == 0)
                     _context.Add(book);
                 else

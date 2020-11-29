@@ -33,6 +33,8 @@
             <e p="20201122161353_customer_drop_customertype.Designer.cs" t="Include" />
             <e p="20201129151819_adding_books.cs" t="Include" />
             <e p="20201129151819_adding_books.Designer.cs" t="Include" />
+            <e p="20201129164630_add_filename_to_book.cs" t="Include" />
+            <e p="20201129164630_add_filename_to_book.Designer.cs" t="Include" />
             <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
           </e>
         </e>
@@ -143,6 +145,8 @@
           </e>
           <e p="uploads" t="Include">
             <e p="Screenshot 2020-11-10 at 10.24.39_3282.png" t="Include" />
+            <e p="Screenshot 2020-11-23 at 21.14.13_534b.png" t="Include" />
+            <e p="Screenshot 2020-11-26 at 18.24.30_1764.png" t="Include" />
           </e>
         </e>
       </e>
