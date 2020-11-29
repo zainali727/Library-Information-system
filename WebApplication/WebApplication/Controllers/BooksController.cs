@@ -18,15 +18,15 @@ namespace WebApplication.Controllers
         // GET
         public IActionResult Index()
         {
-            var books= _context.books.ToList();
-            return View(Books);
+            var books = _context.Books.ToList();
+            return View(books);
         }
 
         // GET: Customer/Create
         public IActionResult AddOrEdit(int id = 0)
         {
             return View(id == 0
-                ? new books()
+                ? new Book()
                 : _context.Books.Find(id));
         }
 
@@ -50,9 +50,9 @@ namespace WebApplication.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            var books = await _context.Books.FindAsync(id);
+            var book = await _context.Books.FindAsync(id);
 
-            if (books != null)
+            if (book != null)
             {
                 _context.Books.Remove(book);
                 await _context.SaveChangesAsync();
