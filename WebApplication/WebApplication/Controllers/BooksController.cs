@@ -51,7 +51,7 @@ namespace WebApplication.Controllers
                     var uniqueFileName = GetUniqueFileName(book.MyImage.FileName);
                     var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
                     var filePath = Path.Combine(uploads,uniqueFileName);
-                    book.MyImage.CopyTo(new FileStream(filePath, FileMode.Create));
+                    book.MyImage.CopyTo(new FileStream(filePath, FileMode.OpenOrCreate));
 
                     book.ImageFileName = uniqueFileName;
                 }

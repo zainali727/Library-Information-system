@@ -5,46 +5,46 @@
 }
 
 <h4>Book Form</h4>
-<hr/>
+<hr />
 <div class="row">
     <div class="col-md-6">
         <form asp-action="AddOrEdit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id"/>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control"/>
+                <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label asp-for="Author" class="control-label"></label>
-                    <input asp-for="Author" class="form-control"/>
+                    <input asp-for="Author" class="form-control" />
                     <span asp-validation-for="Author" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label asp-for="ISBN" class="control-label"></label>
-                    <input asp-for="ISBN" class="form-control"/>
+                    <input asp-for="ISBN" class="form-control" />
                     <span asp-validation-for="ISBN" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label asp-for="Genre" class="control-label"></label>
-                <input asp-for="Genre" class="form-control"/>
+                <input asp-for="Genre" class="form-control" />
                 <span asp-validation-for="Genre" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PublishedDate" class="control-label"></label>
-                <input asp-for="PublishedDate" class="form-control"/>
+                <input asp-for="PublishedDate" class="form-control" />
                 <span asp-validation-for="PublishedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">Upload book image</label>
-                <input asp-for="MyImage"/>
+                <input asp-for="MyImage" />
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <input type="submit" value="Submit" class="btn btn-primary btn-block"/>
+                    <input type="submit" value="Submit" class="btn btn-primary btn-block" />
                 </div>
                 <div class="form-group col-md-6">
                     <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i> Back to List</a>
@@ -53,6 +53,8 @@
         </form>
     </div>
 </div>
+
+<img src="~/uploads/@Model.ImageFileName" alt="my img" />
 
 
 @section Scripts {
