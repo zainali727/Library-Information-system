@@ -38,6 +38,12 @@
                 <input asp-for="PublishedDate" class="form-control"/>
                 <span asp-validation-for="PublishedDate" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label class="control-label">Upload book image</label>
+                <form asp-action="Upload" enctype="multipart/form-data">
+                    <input asp-for="MyImage"/>
+                </form>
+            </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <input type="submit" value="Submit" class="btn btn-primary btn-block"/>
@@ -49,15 +55,6 @@
         </form>
     </div>
 </div>
-
-<form asp-action="Upload" enctype="multipart/form-data">   
-
-    <input asp-for="ImageCaption"/>
-    <input asp-for="ImageDescription"/>
-    <input asp-for="MyImage"/>
-
-    <input type="submit"/>
-</form>
 
 
 @section Scripts {
