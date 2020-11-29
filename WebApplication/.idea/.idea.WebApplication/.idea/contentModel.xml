@@ -141,6 +141,9 @@
               <e p="LICENSE.txt" t="Include" />
             </e>
           </e>
+          <e p="uploads" t="Include">
+            <e p="Screenshot 2020-11-10 at 10.24.39_3282.png" t="Include" />
+          </e>
         </e>
       </e>
       <e p="WebApplication.sln" t="IncludeFlat" />

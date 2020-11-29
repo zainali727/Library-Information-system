@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApplication.Models
 {
@@ -22,5 +23,12 @@ namespace WebApplication.Models
         [Column(TypeName ="nvarchar(250)")]
         [Required]
         public string  PublishedDate { get; set; }
+        
+        [NotMappedAttribute]
+        public string ImageCaption { set;get; }
+        [NotMappedAttribute]
+        public string ImageDescription { set;get; }
+        [NotMappedAttribute]
+        public IFormFile MyImage { set; get; }
     }
 }

@@ -1,5 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Data;
 using WebApplication.Models;
@@ -9,10 +12,12 @@ namespace WebApplication.Controllers
     public class BooksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public BooksController(ApplicationDbContext context)
+        public BooksController(ApplicationDbContext context, IWebHostEnvironment hostingEnvironment)
         {
             _context = context;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         // GET
@@ -64,6 +69,32 @@ namespace WebApplication.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+        
+        [HttpPost]
+        public IActionResult Upload(Book model)
+        {
+            // do other validations on your model as needed
+            if (model.MyImage != null)
+            {
+                var uniqueFileName = GetUniqueFileName(model.MyImage.FileName);
+                var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+                var filePath = Path.Combine(uploads,uniqueFileName);
+                model.MyImage.CopyTo(new FileStream(filePath, FileMode.Create)); 
+
+                //to do : Save uniqueFileName  to your db table   
+            }
+            // to do  : Return something
+            return RedirectToAction("Index","Home");
+        }
+        
+        private string GetUniqueFileName(string fileName)
+        {
+            fileName = Path.GetFileName(fileName);
+            return  Path.GetFileNameWithoutExtension(fileName)
+                    + "_" 
+                    + Guid.NewGuid().ToString().Substring(0, 4) 
+                    + Path.GetExtension(fileName);
         }
     }
 }

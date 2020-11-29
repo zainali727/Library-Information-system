@@ -50,6 +50,15 @@
     </div>
 </div>
 
+<form asp-action="Upload" enctype="multipart/form-data">   
+
+    <input asp-for="ImageCaption"/>
+    <input asp-for="ImageDescription"/>
+    <input asp-for="MyImage"/>
+
+    <input type="submit"/>
+</form>
+
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
