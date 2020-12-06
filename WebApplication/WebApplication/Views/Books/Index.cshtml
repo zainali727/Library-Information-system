@@ -47,14 +47,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Author)
             </td>
-            <td>
+            <td>``
                 @Html.DisplayFor(modelItem => item.ISBN)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Genre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PublishedDate)
+               @item.PublishedDate.ToString("d")
             </td>
             <td>
                 <a asp-action="Show" asp-route-id="@item.Id" class="btn btn-outline-success">

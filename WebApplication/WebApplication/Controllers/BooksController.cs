@@ -46,7 +46,7 @@ namespace WebApplication.Controllers
         public IActionResult AddOrEdit(int id = 0)
         {
             return View(id == 0
-                ? new Book()
+                ? new Book { PublishedDate = DateTime.Now}
                 : _context.Books.Find(id));
         }
 

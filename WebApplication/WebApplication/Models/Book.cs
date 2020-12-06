@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
@@ -24,11 +25,11 @@ namespace WebApplication.Models
         [Column(TypeName ="nvarchar(250)")]
         [Required]
         public string  Genre { get; set; }
-        
-        [Column(TypeName ="nvarchar(250)")]
+
+        [Column(TypeName = "dstetime2")]
         [Required]
-        public string  PublishedDate { get; set; }
-        
+        public DateTime PublishedDate { get; set; }
+
         [Column(TypeName ="nvarchar(250)")]
         public string ImageFileName { get; set; }
         
