@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApplication.Data;
 using WebApplication.Models;
 
@@ -21,10 +22,18 @@ namespace WebApplication.Controllers
         }
 
         // GET
-        public IActionResult Index()
+        
+        public async Task<IActionResult> Index(string searchString)
         {
-            var books = _context.Books.ToList();
-            return View(books);
+            var books = from m in _context.Books
+                        select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                books = books.Where(s => s.Title.Contains(searchString));
+            }
+
+            return View(await books.ToListAsync());
         }
 
         public IActionResult Show(int id)
@@ -106,5 +115,7 @@ namespace WebApplication.Controllers
                     + Guid.NewGuid().ToString().Substring(0, 4) 
                     + Path.GetExtension(fileName);
         }
+
+       
     }
 }
