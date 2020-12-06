@@ -30,7 +30,8 @@ namespace WebApplication.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                books = books.Where(s => s.Title.Contains(searchString));
+                books = books.Where(s => s.Title.Contains(searchString) || s.Author.Contains(searchString) || s.Genre.Contains(searchString));
+
             }
 
             return View(await books.ToListAsync());
