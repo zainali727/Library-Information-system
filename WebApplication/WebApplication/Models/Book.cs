@@ -35,5 +35,8 @@ namespace WebApplication.Models
         
         [NotMappedAttribute]
         public IFormFile MyImage { set; get; }
+
+        public int Quantity { get; set; }
+       
     }
 }
