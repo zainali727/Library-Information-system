@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.Lastname)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AddressLine1)
+            @Html.DisplayNameFor(model => model.PostCode)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -42,8 +42,9 @@
                 @Html.DisplayFor(modelItem => item.Lastname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AddressLine1)
+                @Html.DisplayFor(modelItem => item.PostCode)
             </td>
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
@@ -57,7 +58,7 @@
                 <a asp-action="AddOrEdit" asp-route-id="@item.Id" class="btn btn-outline-success">
                     <i class="fa fa-marker fa-lg">Edit</i>
                 </a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1" 
+                <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1"
                    onclick="return confirm('Are you sure to delete this record?')">
                     <i class="fa fa-trash-alt fa-lg">Delete</i>
                 </a>
