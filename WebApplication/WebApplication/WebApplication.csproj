@@ -17,12 +17,6 @@
       <Folder Include="Data\DB\" />
       <Folder Include="Pages" />
       <Folder Include="wwwroot\uploads" />
-      <Folder Include="wwwroot\uploads\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Remove="wwwroot\uploads\Screenshot 2020-11-23 at 21.14.13_534b.png" />
-      <Content Remove="wwwroot\uploads\Screenshot 2020-11-23 at 12.38.33_acb3.png" />
     </ItemGroup>
 
 </Project>
