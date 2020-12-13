@@ -24,6 +24,7 @@
         </e>
         <e p="Data" t="Include">
           <e p="ApplicationDbContext.cs" t="Include" />
+          <e p="DB" t="Include" />
           <e p="Migrations" t="Include">
             <e p="20201122145729_CreateIdentitySchema.cs" t="Include" />
             <e p="20201122145729_CreateIdentitySchema.Designer.cs" t="Include" />
@@ -39,6 +40,8 @@
             <e p="20201206155839_Address_fields.Designer.cs" t="Include" />
             <e p="20201206161905_Changed_String_To_Date.cs" t="Include" />
             <e p="20201206161905_Changed_String_To_Date.Designer.cs" t="Include" />
+            <e p="20201213150629_add_column_quantity.cs" t="Include" />
+            <e p="20201213150629_add_column_quantity.Designer.cs" t="Include" />
             <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
           </e>
         </e>
@@ -148,12 +151,6 @@
             </e>
           </e>
           <e p="uploads" t="Include">
-            <e p="1406360198_54c5.jpg" t="Include" />
-            <e p="1406360198_72f6.jpg" t="Include" />
-            <e p="1406360198_aaee.jpg" t="Include" />
-            <e p="51MjPyuVqRL_e055.jpg" t="Include" />
-            <e p="OIP_589c.jfif" t="Include" />
-            <e p="OIP_ab03.jfif" t="Include" />
             <e p="Screenshot 2020-11-10 at 10.24.39_3282.png" t="Include" />
             <e p="Screenshot 2020-11-23 at 12.38.33_acb3.png" t="Include" />
             <e p="Screenshot 2020-11-23 at 21.14.13_534b.png" t="Include" />

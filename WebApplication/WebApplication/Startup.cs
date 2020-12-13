@@ -21,15 +21,18 @@ namespace WebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var contentRoot = services.BuildServiceProvider()
+                .GetService<IWebHostEnvironment>()
+                .ContentRootPath;
+            
             var connString = Configuration.GetConnectionString("DefaultConnection");
             if(connString.Contains("%CONTENTROOTPATH%"))
             {
-               // connString.Replace("%CONTENTROOTPATH%", Configuration.)
+                connString = connString.Replace("%CONTENTROOTPATH%", contentRoot);
             }
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(connString));
             
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
