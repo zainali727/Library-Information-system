@@ -1,3 +1,4 @@
+@using System.Globalization
 @model IEnumerable<WebApplication.Models.Book>
 
 @{
@@ -54,7 +55,7 @@
                 @Html.DisplayFor(modelItem => item.Genre)
             </td>
             <td>
-               @item.PublishedDate.ToString("d")
+                @item.PublishedDate.ToString("dd/MM/yyyy")
             </td>
             <td>
                 <a asp-action="Show" asp-route-id="@item.Id" class="btn btn-outline-success">

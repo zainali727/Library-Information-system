@@ -25,7 +25,7 @@ namespace WebApplication.Controllers
         
         public async Task<IActionResult> Index(string searchString)
         {
-            var books = from m in _context.Books
+            var books = from m in _context.Books.Include(x => x.BookReviews)
                         select m;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -39,7 +39,7 @@ namespace WebApplication.Controllers
 
         public IActionResult Show(int id)
         {
-            return View(_context.Books.Find(id));
+            return View(_context.Books.Include(x => x.BookReviews).FirstOrDefault(x => x.Id == id));
         }
         
         // GET: Member/Create

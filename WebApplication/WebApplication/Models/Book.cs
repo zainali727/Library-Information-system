@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,11 @@ namespace WebApplication.Models
 {
     public class Book
     {
+        public Book()
+        {
+            BookReviews = new List<BookReview>();
+        }
+        
         [Key]
         public int Id { get; set; }
         
@@ -38,5 +44,6 @@ namespace WebApplication.Models
 
         public int Quantity { get; set; }
        
+        public List<BookReview> BookReviews { get; set; }
     }
 }
