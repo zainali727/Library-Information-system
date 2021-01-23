@@ -14,7 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Data\DB\" />
       <Folder Include="Pages" />
       <Folder Include="wwwroot\uploads" />
     </ItemGroup>
