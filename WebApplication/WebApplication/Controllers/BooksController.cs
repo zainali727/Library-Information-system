@@ -42,7 +42,7 @@ namespace WebApplication.Controllers
             return View(_context.Books.Find(id));
         }
         
-        // GET: Customer/Create
+        // GET: Member/Create
         public IActionResult AddOrEdit(int id = 0)
         {
             return View(id == 0

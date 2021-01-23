@@ -8,40 +8,40 @@ namespace WebApplication.Data.Migrations
         {
             migrationBuilder.RenameColumn(
                 name: "Address",
-                table: "Customers",
+                table: "Members",
                 newName: "PostCode");
 
             migrationBuilder.AddColumn<string>(
                 name: "AddressLine1",
-                table: "Customers",
+                table: "Members",
                 type: "nvarchar(250)",
                 nullable: false,
                 defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
                 name: "AddressLine2",
-                table: "Customers",
+                table: "Members",
                 type: "nvarchar(250)",
                 nullable: false,
                 defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
                 name: "AddressLine3",
-                table: "Customers",
+                table: "Members",
                 type: "nvarchar(250)",
                 nullable: false,
                 defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
                 name: "City",
-                table: "Customers",
+                table: "Members",
                 type: "nvarchar(250)",
                 nullable: false,
                 defaultValue: "");
 
             migrationBuilder.AddColumn<string>(
                 name: "County",
-                table: "Customers",
+                table: "Members",
                 type: "nvarchar(250)",
                 nullable: false,
                 defaultValue: "");
@@ -51,27 +51,27 @@ namespace WebApplication.Data.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "AddressLine1",
-                table: "Customers");
+                table: "Members");
 
             migrationBuilder.DropColumn(
                 name: "AddressLine2",
-                table: "Customers");
+                table: "Members");
 
             migrationBuilder.DropColumn(
                 name: "AddressLine3",
-                table: "Customers");
+                table: "Members");
 
             migrationBuilder.DropColumn(
                 name: "City",
-                table: "Customers");
+                table: "Members");
 
             migrationBuilder.DropColumn(
                 name: "County",
-                table: "Customers");
+                table: "Members");
 
             migrationBuilder.RenameColumn(
                 name: "PostCode",
-                table: "Customers",
+                table: "Members",
                 newName: "Address");
         }
     }

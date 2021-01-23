@@ -10,8 +10,8 @@ using WebApplication.Data;
 namespace WebApplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201122155302_Customer_new_field")]
-    partial class Customer_new_field
+    [Migration("20201122155302_Member_new_field")]
+    partial class Member_new_field
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -221,7 +221,7 @@ namespace WebApplication.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("WebApplication.Models.Customer", b =>
+            modelBuilder.Entity("WebApplication.Models.Member", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -231,7 +231,7 @@ namespace WebApplication.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<int>("CustomerType")
+                    b.Property<int>("MemberType")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -248,7 +248,7 @@ namespace WebApplication.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Members");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
