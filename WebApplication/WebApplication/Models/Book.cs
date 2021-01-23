@@ -26,11 +26,11 @@ namespace WebApplication.Models
         
         [Column(TypeName ="nvarchar(250)")]
         [Required]
-        public string  ISBN { get; set; }
+        public string ISBN { get; set; }
         
         [Column(TypeName ="nvarchar(250)")]
         [Required]
-        public string  Genre { get; set; }
+        public string Genre { get; set; }
 
         [Column(TypeName = "dstetime2")]
         [Required]

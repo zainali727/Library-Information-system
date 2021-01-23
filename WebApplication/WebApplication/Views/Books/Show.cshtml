@@ -57,7 +57,9 @@
 @foreach (var review in Model.BookReviews)
 {
     <div class="bookReview">
-        <p><span>@review.ReviewerName</span> @review.CreatedDate.ToString("dd/MM/yyyy")</p>
+        <p>
+            <span>@review.ReviewerName</span> @review.CreatedDate.ToString("dd/MM/yyyy")
+        </p>
         <p>@review.Text</p>
     </div>
 }
