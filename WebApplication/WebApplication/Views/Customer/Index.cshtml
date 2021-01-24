@@ -6,6 +6,12 @@
 
 <h4>List of Customers</h4>
 <hr/>
+<form asp-controller="Customer" asp-action="Index">
+    <p>
+        Title: <input type="text" name="SearchString">
+        <input type="submit" value="Search" />
+    </p>
+</form>
 <table class="table table-hover">
     <thead>
     <tr>
