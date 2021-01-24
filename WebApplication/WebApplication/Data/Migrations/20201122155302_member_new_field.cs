@@ -2,19 +2,19 @@
 
 namespace WebApplication.Data.Migrations
 {
-    public partial class Customer_new_field : Migration
+    public partial class Member_new_field : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
                 name: "Email",
-                table: "Customers",
+                table: "Members",
                 type: "nvarchar(250)",
                 nullable: true);
 
             migrationBuilder.AddColumn<string>(
                 name: "Telephone",
-                table: "Customers",
+                table: "Members",
                 type: "nvarchar(250)",
                 nullable: true);
         }
@@ -23,11 +23,11 @@ namespace WebApplication.Data.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "Email",
-                table: "Customers");
+                table: "Members");
 
             migrationBuilder.DropColumn(
                 name: "Telephone",
-                table: "Customers");
+                table: "Members");
         }
     }
 }

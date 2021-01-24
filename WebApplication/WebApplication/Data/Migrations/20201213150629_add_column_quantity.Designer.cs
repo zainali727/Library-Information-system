@@ -258,7 +258,7 @@ namespace WebApplication.Data.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("WebApplication.Models.Customer", b =>
+            modelBuilder.Entity("WebApplication.Models.Member", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -308,7 +308,7 @@ namespace WebApplication.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Members");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

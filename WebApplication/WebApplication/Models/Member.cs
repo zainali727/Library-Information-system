@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication.Models
 {
-    public class Customer
+    public class Member
     {
         [Key]
         public int Id { get; set; }

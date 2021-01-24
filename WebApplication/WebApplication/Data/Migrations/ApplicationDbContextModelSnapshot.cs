@@ -256,7 +256,35 @@ namespace WebApplication.Data.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("WebApplication.Models.Customer", b =>
+            modelBuilder.Entity("WebApplication.Models.BookReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("dstetime2");
+
+                    b.Property<string>("ReviewerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BookReviews");
+                });
+
+            modelBuilder.Entity("WebApplication.Models.Member", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -306,7 +334,7 @@ namespace WebApplication.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Members");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -358,6 +386,13 @@ namespace WebApplication.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplication.Models.BookReview", b =>
+                {
+                    b.HasOne("WebApplication.Models.Book", "Book")
+                        .WithMany("BookReviews")
+                        .HasForeignKey("BookId");
                 });
 #pragma warning restore 612, 618
         }

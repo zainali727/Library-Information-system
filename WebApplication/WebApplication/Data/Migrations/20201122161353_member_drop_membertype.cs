@@ -2,20 +2,20 @@
 
 namespace WebApplication.Data.Migrations
 {
-    public partial class customer_drop_customertype : Migration
+    public partial class member_drop_membertype : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "CustomerType",
-                table: "Customers");
+                name: "MemberType",
+                table: "Members");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "CustomerType",
-                table: "Customers",
+                name: "MemberType",
+                table: "Members",
                 type: "int",
                 nullable: false,
                 defaultValue: 0);

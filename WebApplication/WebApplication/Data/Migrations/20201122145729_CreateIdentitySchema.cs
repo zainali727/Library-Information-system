@@ -47,7 +47,7 @@ namespace WebApplication.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customers",
+                name: "Members",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -55,11 +55,11 @@ namespace WebApplication.Data.Migrations
                     Firstname = table.Column<string>(type: "nvarchar(250)", nullable: true),
                     Lastname = table.Column<string>(type: "nvarchar(250)", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(250)", nullable: true),
-                    CustomerType = table.Column<int>(nullable: false)
+                    MemberType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customers", x => x.Id);
+                    table.PrimaryKey("PK_Members", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,7 +226,7 @@ namespace WebApplication.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Customers");
+                name: "Members");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

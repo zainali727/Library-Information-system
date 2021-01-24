@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="PublishedDate" class="control-label"></label>
-                <input asp-for="PublishedDate" class="form-control" type="date"  asp-format="{0:yyyy-MM-dd}" disabled/>
+                <input asp-for="PublishedDate" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}" disabled/>
                 <span asp-validation-for="PublishedDate" class="text-danger"></span>
             </div>
             <div class="form-row">
@@ -48,12 +48,21 @@
     <div class="col-md-6">
         @if (!string.IsNullOrEmpty(Model.ImageFileName))
         {
-            <img height="400px" width="400px" src="~/uploads/@Model.ImageFileName"  alt="my img"/>
+            <img height="400px" width="400px" src="~/uploads/@Model.ImageFileName" alt="my img"/>
         }
     </div>
 </div>
 
-
+<h2>Reviews</h2>
+@foreach (var review in Model.BookReviews)
+{
+    <div class="bookReview">
+        <p>
+            <span>@review.ReviewerName</span> @review.CreatedDate.ToString("dd/MM/yyyy")
+        </p>
+        <p>@review.Text</p>
+    </div>
+}
 
 
 @section Scripts {

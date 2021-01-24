@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
@@ -7,6 +8,11 @@ namespace WebApplication.Models
 {
     public class Book
     {
+        public Book()
+        {
+            BookReviews = new List<BookReview>();
+        }
+        
         [Key]
         public int Id { get; set; }
         
@@ -20,11 +26,11 @@ namespace WebApplication.Models
         
         [Column(TypeName ="nvarchar(250)")]
         [Required]
-        public string  ISBN { get; set; }
+        public string ISBN { get; set; }
         
         [Column(TypeName ="nvarchar(250)")]
         [Required]
-        public string  Genre { get; set; }
+        public string Genre { get; set; }
 
         [Column(TypeName = "dstetime2")]
         [Required]
@@ -38,5 +44,6 @@ namespace WebApplication.Models
 
         public int Quantity { get; set; }
        
+        public List<BookReview> BookReviews { get; set; }
     }
 }

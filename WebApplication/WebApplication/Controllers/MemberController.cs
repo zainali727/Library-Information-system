@@ -6,11 +6,11 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
-    public class CustomerController : Controller
+    public class MemberController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CustomerController(ApplicationDbContext context)
+        public MemberController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -18,48 +18,48 @@ namespace WebApplication.Controllers
         // GET
         public IActionResult Index()
         {
-            var customers = _context.Customers.ToList();
-            return View(customers);
+            var members = _context.Members.ToList();
+            return View(members);
         }
 
         public IActionResult Show(int id)
         {
-            return View(_context.Customers.Find(id));
+            return View(_context.Members.Find(id));
         }
         
-        // GET: Customer/Create
+        // GET: Members/Create
         public IActionResult AddOrEdit(int id = 0)
         {
             return View(id == 0 
-                ? new Customer() 
-                : _context.Customers.Find(id));
+                ? new Member() 
+                : _context.Members.Find(id));
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrEdit(Customer customer)
+        public async Task<IActionResult> AddOrEdit(Member member)
         {
             if (ModelState.IsValid)
             {
-                if (customer.Id == 0)
-                    _context.Add(customer);
+                if (member.Id == 0)
+                    _context.Add(member);
                 else
-                    _context.Update(customer);
+                    _context.Update(member);
                 
                 await _context.SaveChangesAsync();
                 
                 return RedirectToAction(nameof(Index));
             }
-            return View(customer);
+            return View(member);
         }
 
         public async Task<IActionResult> Delete(int? id)
         {
-            var customer = await _context.Customers.FindAsync(id);
+            var members = await _context.Members.FindAsync(id);
 
-            if (customer != null)
+            if (members != null)
             {
-                _context.Customers.Remove(customer);
+                _context.Members.Remove(members);
                 await _context.SaveChangesAsync();
             }
             

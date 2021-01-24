@@ -1,56 +1,44 @@
-﻿@model Book
+@model WebApplication.Models.Book
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h4>Book Form</h4>
+<h4>@Model.Title</h4>
 <hr/>
 <div class="row">
     <div class="col-md-6">
-        <form asp-action="AddOrEdit" enctype="multipart/form-data">
+        <form asp-action="">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id"/>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control"/>
+                <input asp-for="Title" class="form-control" disabled/>
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label asp-for="Author" class="control-label"></label>
-                    <input asp-for="Author" class="form-control"/>
+                    <input asp-for="Author" class="form-control" disabled/>
                     <span asp-validation-for="Author" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label asp-for="ISBN" class="control-label"></label>
-                    <input asp-for="ISBN" class="form-control"/>
+                    <input asp-for="ISBN" class="form-control" disabled/>
                     <span asp-validation-for="ISBN" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
                 <label asp-for="Genre" class="control-label"></label>
-                <input asp-for="Genre" class="form-control"/>
+                <input asp-for="Genre" class="form-control" disabled/>
                 <span asp-validation-for="Genre" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="PublishedDate" class="control-label"></label>
-                <input asp-for="PublishedDate" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}"/>
+                <input asp-for="PublishedDate" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}" disabled/>
                 <span asp-validation-for="PublishedDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label class="control-label">Upload book image</label>
-                <input asp-for="MyImage"/>
-            </div>
-            <div class="form-group" hidden>
-                <label asp-for="ImageFileName" class="control-label"></label>
-                <input asp-for="ImageFileName" class="form-control"/>
-                <span asp-validation-for="ImageFileName" class="text-danger"></span>
-            </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <input type="submit" value="Submit" class="btn btn-primary btn-block"/>
-                </div>
                 <div class="form-group col-md-6">
                     <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i> Back to List</a>
                 </div>
@@ -65,7 +53,27 @@
     </div>
 </div>
 
-
-@section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+<h2>Reviews</h2>
+@foreach (var review in Model.BookReviews)
+{
+    <div class="bookReview">
+        <p>
+            <span>@review.ReviewerName</span> @review.CreatedDate.ToString("dd/MM/yyyy")
+        </p>
+        <p>@review.Text</p>
+    </div>
 }
+
+<br/>
+<h2>Add review</h2>
+<form action="/MemberBooks/AddReview/@Model.Id" method="post" enctype="application/x-www-form-urlencoded">
+    <label for="reviewerName">Name</label>
+    <br>
+    <input type="text" name="reviewerName">
+    <br><br>
+    <label for="text">Enter review</label>
+    <br>
+    <textarea type="text" name="text" style="width: 100%"></textarea>
+    <br><br>
+    <input type="submit" value="Submit" class="btn btn-secondary btn-block">
+</form>
