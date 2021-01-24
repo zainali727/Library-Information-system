@@ -1,8 +1,6 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WebApplication.Data;
 using WebApplication.Models;
 
@@ -18,18 +16,10 @@ namespace WebApplication.Controllers
         }
 
         // GET
-        public async Task<IActionResult> Index(string searchString)
+        public IActionResult Index()
         {
-            var customer = from m in _context.Customers
-                        select m;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                customer = customer.Where(s => s.Firstname.Contains(searchString) || s.Lastname.Contains(searchString) || s.PostCode.Contains(searchString));
-
-            }
-
-            return View(await customer.ToListAsync());
+            var customers = _context.Customers.ToList();
+            return View(customers);
         }
 
         public IActionResult Show(int id)
