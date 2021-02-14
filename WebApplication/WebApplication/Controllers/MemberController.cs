@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Data;
 using WebApplication.Models;
@@ -11,10 +12,14 @@ namespace WebApplication.Controllers
     public class MemberController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public MemberController(ApplicationDbContext context)
+        public MemberController(ApplicationDbContext context, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         // GET
@@ -64,6 +69,14 @@ namespace WebApplication.Controllers
                 _context.Members.Remove(members);
                 await _context.SaveChangesAsync();
             }
+            
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LockoutMember(Member member)
+        {
+            var users = _userManager.Users.ToList();
             
             return RedirectToAction(nameof(Index));
         }
