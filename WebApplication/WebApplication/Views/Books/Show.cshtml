@@ -54,6 +54,10 @@
 </div>
 
 <h2>Reviews</h2>
+@if (!Model.BookReviews.Any())
+{
+    <p>No reviews yet!</p>
+}
 @foreach (var review in Model.BookReviews)
 {
     <div class="bookReview">

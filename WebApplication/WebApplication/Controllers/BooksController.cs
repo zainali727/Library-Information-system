@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
+    [Authorize(Roles = "Administrator,Manager")]
     public class BooksController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -80,10 +82,16 @@ namespace WebApplication.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            var book = await _context.Books.FindAsync(id);
+            var book = _context.Books.Include(x => x.BookReviews).FirstOrDefault(x => x.Id == id);
 
             if (book != null)
             {
+                var bookReviews = book.BookReviews;
+                foreach (var bookReview in bookReviews)
+                {
+                    _context.BookReviews.Remove(bookReview);
+                }
+
                 _context.Books.Remove(book);
                 await _context.SaveChangesAsync();
             }

@@ -35,7 +35,8 @@ namespace WebApplication.Controllers
 
         public IActionResult Show(int id)
         {
-            return View(_context.Books.Include(x => x.BookReviews).FirstOrDefault(x => x.Id == id));
+            var firstOrDefault = _context.Books.Include(x => x.BookReviews).FirstOrDefault(x => x.Id == id);
+            return View(firstOrDefault);
         }
 
         [HttpPost]
@@ -64,7 +65,7 @@ namespace WebApplication.Controllers
             {
                 controller = "MemberBooks",
                 action = "Show",
-                id = 1
+                id = id
             });
         }
     }

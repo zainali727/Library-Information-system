@@ -48,5 +48,9 @@ namespace WebApplication.Models
         [Column(TypeName ="nvarchar(250)")]
         [Required]
         public string  Telephone { get; set; }
+        
+        [Column(TypeName ="bool")]
+        [Required]
+        public bool Banned { get; set; }
     }
 }

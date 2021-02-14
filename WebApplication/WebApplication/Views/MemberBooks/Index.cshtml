@@ -1,4 +1,3 @@
-@using System.Globalization
 @model IEnumerable<WebApplication.Models.Book>
 
 @{
@@ -30,11 +29,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.PublishedDate)
-        </th>
-        <th>
-            <a asp-controller="Books" asp-action="AddOrEdit" class="btn btn-outline-success">
-                <i class="far fa-plus-square"></i> Add Book
-            </a>
         </th>
     </tr>
     </thead>
