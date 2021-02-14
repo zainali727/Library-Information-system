@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -25,7 +26,7 @@ namespace WebApplication.Controllers
         // GET
         public IActionResult Index()
         {
-            var members = _context.Members.ToList();
+            var members = _context.Members?.ToList();
             return View(members);
         }
 
@@ -76,7 +77,43 @@ namespace WebApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> LockoutMember(Member member)
         {
+            var findMember = await _context.Members.FindAsync(member.Id);
+
+            if (findMember != null)
+            {
+                findMember.Banned = !member.Banned;
+                await _context.SaveChangesAsync();
+            }
+            
+            return RedirectToAction(nameof(Index));
+        }
+        
+        [HttpPost]
+        public async Task<IActionResult> ImportMembers()
+        {
             var users = _userManager.Users.ToList();
+
+            foreach (var user in users)
+            {
+                var currentMember = _context
+                    .Members
+                    .FirstOrDefault(x => x.Email.ToLower() == user.UserName.ToLower());
+                
+                if(currentMember != null) continue;
+                await _userManager.AddToRoleAsync(user, "User");
+                if(await _userManager.IsInRoleAsync(user, "Administrator") || await _userManager.IsInRoleAsync(user, "Manager")) continue;
+
+                var member = new Member
+                {
+                    Firstname = "", Lastname = "", PostCode = "",
+                    Email = user.UserName,
+                    AddressLine1 = "", AddressLine2 = "", AddressLine3 = "", City = "", County = "", Telephone = ""
+                };
+
+                await _context.AddAsync(member);
+            }
+            
+            await _context.SaveChangesAsync();
             
             return RedirectToAction(nameof(Index));
         }

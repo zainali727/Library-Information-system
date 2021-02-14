@@ -109,14 +109,14 @@ namespace WebApplication
                 endpoints.MapRazorPages();
             });
 
+            AddRole(services, "User").Wait();
             CreateUserRoles(services, "Administrator", "admin@admin.com").Wait();
             CreateUserRoles(services, "Manager", "manager@manager.com").Wait();
         }
         
-        private async Task CreateUserRoles(IServiceProvider serviceProvider, string roleName, string username)
+        private async Task AddRole(IServiceProvider serviceProvider, string roleName)
         {
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
 
             //Adding Admin Role
             var roleCheck = await roleManager.RoleExistsAsync(roleName);
@@ -125,6 +125,14 @@ namespace WebApplication
                 //create the roles and seed them to the database
                 await roleManager.CreateAsync(new IdentityRole(roleName));
             }
+        }
+        
+        private async Task CreateUserRoles(IServiceProvider serviceProvider, string roleName, string username)
+        {
+            var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+            await AddRole(serviceProvider, roleName);
+            
             //Assign Admin role to the main User here we have given our newly registered 
             //login id for Admin management
             var user = await userManager.FindByEmailAsync(username);

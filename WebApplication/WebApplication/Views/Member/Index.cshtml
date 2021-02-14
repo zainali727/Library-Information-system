@@ -5,7 +5,15 @@
 }
 
 <h4>Members</h4>
+
 <hr/>
+
+<div class="form-row">
+    <form asp-controller="Member" asp-action="ImportMembers" method="post" class="form-group col-md-6">
+        <input type="submit" value="Import newly registered users as members" class="btn btn-info btn-block"/>
+    </form>
+</div>
+
 <table class="table table-hover">
     <thead>
     <tr>
@@ -23,6 +31,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Banned)
         </th>
         <th>
             <a asp-controller="Member" asp-action="AddOrEdit" class="btn btn-outline-success">
@@ -44,12 +55,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PostCode)
             </td>
-           
+
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Telephone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Banned)
             </td>
             <td>
                 <a asp-action="Show" asp-route-id="@item.Id" class="btn btn-outline-success">

@@ -74,9 +74,11 @@
         </form>
 
         <form asp-action="LockoutMember">
+            <input type="hidden" asp-for="Id"/>
+            <input type="hidden" asp-for="Banned" class="form-control"/>
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <input type="submit" value="Ban member" class="btn btn-danger btn-block"/>
+                    <input type="submit" value="@($"{(Model.Banned ? "Unban member" : "Ban member")}")" class="btn btn-danger btn-block"/>
                 </div>
             </div>
         </form>
