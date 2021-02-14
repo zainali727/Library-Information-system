@@ -1,11 +1,13 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Data;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
+    [Authorize(Roles = "Administrator,Manager")]
     public class MemberController : Controller
     {
         private readonly ApplicationDbContext _context;

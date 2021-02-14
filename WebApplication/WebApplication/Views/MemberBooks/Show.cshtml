@@ -1,3 +1,7 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
 @model WebApplication.Models.Book
 
 @{
@@ -54,6 +58,10 @@
 </div>
 
 <h2>Reviews</h2>
+@if (!Model.BookReviews.Any())
+{
+    <p>No reviews yet!</p>
+}
 @foreach (var review in Model.BookReviews)
 {
     <div class="bookReview">
@@ -66,14 +74,22 @@
 
 <br/>
 <h2>Add review</h2>
-<form action="/MemberBooks/AddReview/@Model.Id" method="post" enctype="application/x-www-form-urlencoded">
-    <label for="reviewerName">Name</label>
-    <br>
-    <input type="text" name="reviewerName">
-    <br><br>
-    <label for="text">Enter review</label>
-    <br>
-    <textarea type="text" name="text" style="width: 100%"></textarea>
-    <br><br>
-    <input type="submit" value="Submit" class="btn btn-secondary btn-block">
-</form>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form action="/MemberBooks/AddReview/@Model.Id" method="post" enctype="application/x-www-form-urlencoded">
+        <label for="reviewerName">Name</label>
+        <br>
+        <input type="text" name="reviewerName">
+        <br><br>
+        <label for="text">Enter review</label>
+        <br>
+        <textarea type="text" name="text" style="width: 100%"></textarea>
+        <br><br>
+        <input type="submit" value="Submit" class="btn btn-secondary btn-block">
+    </form>
+}
+else
+{
+    <p>Please <a asp-area="Identity" asp-page="/Account/Login">Login</a> to add a review</p>
+}
