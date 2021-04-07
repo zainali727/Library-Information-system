@@ -11,6 +11,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9" />
+        <PackageReference Include="System.Drawing.Common" Version="4.6.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -24,6 +25,8 @@
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Remove="wwwroot\uploads\Screenshot 2020-11-14 at 02.43.36_f3a2.png" />
+      <Content Remove="wwwroot\uploads\Screenshot 2020-11-14 at 02.43.36_418c.png" />
     </ItemGroup>
 
 </Project>

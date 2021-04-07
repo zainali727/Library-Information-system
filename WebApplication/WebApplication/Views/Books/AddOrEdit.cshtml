@@ -62,10 +62,16 @@
             </div>
         </form>
     </div>
+    @* <div class="col-md-6"> *@
+    @*     @if (!string.IsNullOrEmpty(Model.ImageFileName)) *@
+    @*     { *@
+    @*         <img height="400px" width="400px" src="~/uploads/@Model.ImageFileName" alt="my img"/> *@
+    @*     } *@
+    @* </div> *@
     <div class="col-md-6">
-        @if (!string.IsNullOrEmpty(Model.ImageFileName))
+        @if (Model.ImageBytes != null)
         {
-            <img height="400px" width="400px" src="~/uploads/@Model.ImageFileName" alt="my img"/>
+            <img height="400px" width="400px" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.ImageBytes)"/>
         }
     </div>
 </div>

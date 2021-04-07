@@ -42,6 +42,9 @@ namespace WebApplication.Models
         [NotMappedAttribute]
         public IFormFile MyImage { set; get; }
 
+        [Column(TypeName = "varbinary(max)")]
+        public byte[] ImageBytes { get; set; }
+
         [Column(TypeName ="int")]
         [Required]
         public int Quantity { get; set; }
