@@ -39,6 +39,11 @@
                 <span asp-validation-for="PublishedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" type="number" min="0"/>
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label class="control-label">Upload book image</label>
                 <input asp-for="MyImage"/>
             </div>

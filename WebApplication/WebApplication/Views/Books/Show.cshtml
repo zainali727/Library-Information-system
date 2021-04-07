@@ -4,9 +4,22 @@
     ViewData["Title"] = "Create";
 }
 
-<h4>@Model.Title</h4>
+<div>
+    <div style="float: left">
+        <h4>@Model.Title</h4>
+    </div>
+    <div style="float: left">
+        @if (@Model.Quantity <= 0)
+        {
+            <a class="text-danger ml-1" disabled="">
+                <i class="fa fa-trash-alt fa-lg">Out of stock!</i>
+            </a>
+        }
+    </div>
+</div>
+
 <hr/>
-<div class="row">
+<div class="row" style="clear: both">
     <div class="col-md-6">
         <form asp-action="AddOrEdit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -37,6 +50,11 @@
                 <label asp-for="PublishedDate" class="control-label"></label>
                 <input asp-for="PublishedDate" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}" disabled/>
                 <span asp-validation-for="PublishedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quantity" class="control-label"></label>
+                <input asp-for="Quantity" class="form-control" type="number" disabled/>
+                <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">

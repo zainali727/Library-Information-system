@@ -42,6 +42,8 @@ namespace WebApplication.Models
         [NotMappedAttribute]
         public IFormFile MyImage { set; get; }
 
+        [Column(TypeName ="int")]
+        [Required]
         public int Quantity { get; set; }
        
         public List<BookReview> BookReviews { get; set; }
