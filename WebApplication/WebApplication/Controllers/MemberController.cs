@@ -24,8 +24,9 @@ namespace WebApplication.Controllers
         }
 
         // GET
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            await ImportMembers();
             var members = _context.Members?.ToList();
             return View(members);
         }
