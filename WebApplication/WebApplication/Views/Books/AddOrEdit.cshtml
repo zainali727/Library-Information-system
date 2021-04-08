@@ -44,6 +44,11 @@
                 <span asp-validation-for="Quantity" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="FinePerDay" class="control-label">Fine Per Day (£)</label>
+                <input asp-for="FinePerDay" class="form-control"/>
+                <span asp-validation-for="FinePerDay" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label class="control-label">Upload book image</label>
                 <input asp-for="MyImage"/>
             </div>

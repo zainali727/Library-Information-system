@@ -48,6 +48,11 @@ namespace WebApplication.Models
         [Column(TypeName ="int")]
         [Required]
         public int Quantity { get; set; }
+        
+        [Column(TypeName ="money")]
+        [Required]
+        [Range(0, 999, ErrorMessage = "The field {0} must be greater than {1}.")]
+        public decimal FinePerDay { get; set; }
        
         public List<BookReview> BookReviews { get; set; }
     }
