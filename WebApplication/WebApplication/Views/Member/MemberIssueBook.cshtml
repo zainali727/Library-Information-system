@@ -1,0 +1,55 @@
+@model WebApplication.Models.MemberIssueBookModel
+
+@{
+    ViewBag.Title = "Issue book to member";
+    Layout = "_Layout";
+}
+
+<h4>Issue a book to @Model.Firstname @Model.Lastname (@Model.Email)</h4>
+<hr/>
+<form asp-controller="Member" asp-action="MemberIssueBook" method="get">
+    <p>
+        ISBN: <input type="text" name="SearchString">
+        <input type="submit" value="Search"/>
+        @if (!Model.BookFound)
+        {
+            <a class="text-danger ml-1" disabled="">
+                <i class="fa fa-trash-alt fa-lg">Not found!</i>
+            </a>
+        }
+    </p>
+</form>
+<hr/>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="MemberIssueBook">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @* <input type="hidden" asp-for="Id"/> *@
+
+            @if (Model.Book != null)
+            {
+                @Model.Book.ISBN
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="submit" value="Issue" class="btn btn-primary btn-block"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i> Back to List</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i> Back to List</a>
+                    </div>
+                </div>
+            }
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

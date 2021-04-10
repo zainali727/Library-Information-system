@@ -40,5 +40,11 @@ namespace WebApplication.Controllers
             
             return View(issuedBooks);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ReturnBook()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

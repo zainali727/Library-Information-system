@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Data;
 using WebApplication.Domain;
+using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -117,6 +118,44 @@ namespace WebApplication.Controllers
             await _context.SaveChangesAsync();
             
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult MemberIssueBook(int id, string searchString)
+        {
+            var model = new MemberIssueBookModel();
+            var member = _context.Members.Find(id);
+            model.Firstname = member.Firstname;
+            model.Lastname = member.Lastname;
+            model.Email = member.Email;
+            model.BookFound = true;
+
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                model.Book = _context.Books.SingleOrDefault(x => x.ISBN.ToLower() == searchString.ToLower());
+                model.BookFound = model.Book != null;
+            }
+
+            return View(model);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MemberIssueBook(MemberIssueBookModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                // if (model.Id == 0)
+                //     _context.Add(model);
+                // else
+                //     _context.Update(model);
+                //
+                // await _context.SaveChangesAsync();
+                
+                return RedirectToAction(nameof(Index));
+            }
+            
+            return View(model);
         }
     }
 }
