@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel.DataAnnotations;
 using WebApplication.Domain;
 
 namespace WebApplication.Models
@@ -11,5 +13,8 @@ namespace WebApplication.Models
         public string Email { get; set; }
         public bool BookFound { get; set; }
         public Book Book { get; set; }
+        
+        [Required]
+        public DateTime DueDate { get; set; }
     }
 }

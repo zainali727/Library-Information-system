@@ -62,12 +62,6 @@
                             <input asp-for="Book.FinePerDay" class="form-control" disabled/>
                         </div>
                     </div>
-                    @* <div class="col-md-6"> *@
-                    @*     @if (!string.IsNullOrEmpty(Model.ImageFileName)) *@
-                    @*     { *@
-                    @*         <img height="400px" width="400px" src="~/uploads/@Model.ImageFileName" alt="my img"/> *@
-                    @*     } *@
-                    @* </div>     *@
                     <div class="col-md-6">
                         @if (Model.Book.ImageBytes != null)
                         {
@@ -77,6 +71,13 @@
                 </div>
 
                 <hr/>
+                
+                <div class="form-group">
+                    <label asp-for="DueDate" class="control-label"></label>
+                    <input asp-for="DueDate" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}"/>
+                    <span asp-validation-for="DueDate" class="text-danger"></span>
+                </div>
+                
                 <div class="form-row">
                     @if (Model.Book.Quantity <= 0)
                     {

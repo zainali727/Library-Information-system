@@ -41,7 +41,7 @@ namespace WebApplication.Controllers
                     };
                 });
             
-            return View(issuedBooks);
+            return View(issuedBooks.OrderBy(x => x.ReturnDate));
         }
 
         public async Task<IActionResult> ReturnBook(int? id)

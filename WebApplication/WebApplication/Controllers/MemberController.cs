@@ -65,12 +65,14 @@ namespace WebApplication.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            var members = await _context.Members.FindAsync(id);
+            var member = await _context.Members.FindAsync(id);
 
-            if (members != null)
+            if (member != null)
             {
-                _context.Members.Remove(members);
+                _context.Members.Remove(member);
                 await _context.SaveChangesAsync();
+
+                await _userManager.DeleteAsync(await _userManager.FindByEmailAsync(member.Email));
             }
             
             return RedirectToAction(nameof(Index));
@@ -130,15 +132,17 @@ namespace WebApplication.Controllers
             model.Lastname = member.Lastname;
             model.Email = member.Email;
             model.BookFound = true;
+            model.DueDate = DateTime.UtcNow.AddDays(7);
 
             if (!string.IsNullOrWhiteSpace(searchString))
             {
                 model.Book = _context.Books.SingleOrDefault(x => x.ISBN.ToLower() == searchString.ToLower());
                 if (model.Book != null)
                 {
-                    model.BookFound = true;
                     model.BookId = model.Book.Id;
                 }
+                
+                model.BookFound = model.Book != null;
             }
 
             return View(model);
@@ -153,7 +157,7 @@ namespace WebApplication.Controllers
 
             var issuedBook = new IssuedBook
             {
-                Book = book, Member = member, IssuedDate = DateTime.UtcNow, ReturnDate = DateTime.UtcNow.AddDays(10)
+                Book = book, Member = member, IssuedDate = DateTime.UtcNow, ReturnDate = model.DueDate
             };
 
             _context.IssuedBook.Add(issuedBook);
