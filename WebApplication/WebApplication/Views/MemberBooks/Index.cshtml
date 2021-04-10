@@ -1,4 +1,4 @@
-@model IEnumerable<WebApplication.Models.Book>
+@model IEnumerable<WebApplication.Domain.Book>
 
 @{
     ViewData["Title"] = "Index";
@@ -50,6 +50,14 @@
             </td>
             <td>
                 @item.PublishedDate.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @if (item.Quantity <= 0)
+                {
+                    <a class="text-danger ml-1" disabled="">
+                        <i class="fa fa-trash-alt fa-lg">Out of stock!</i>
+                    </a>
+                }
             </td>
             <td>
                 <a asp-action="Show" asp-route-id="@item.Id" class="btn btn-outline-success">

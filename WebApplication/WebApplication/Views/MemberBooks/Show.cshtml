@@ -2,15 +2,28 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-@model WebApplication.Models.Book
+@model WebApplication.Domain.Book
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Show books";
 }
 
-<h4>@Model.Title</h4>
+<div>
+    <div style="float: left">
+        <h4>@Model.Title</h4>
+    </div>
+    <div style="float: left">
+        @if (@Model.Quantity <= 0)
+        {
+            <a class="text-danger ml-1" disabled="">
+                <i class="fa fa-trash-alt fa-lg">Out of stock!</i>
+            </a>
+        }
+    </div>
+</div>
+
 <hr/>
-<div class="row">
+<div class="row" style="clear: both">
     <div class="col-md-6">
         <form asp-action="">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -49,10 +62,16 @@
             </div>
         </form>
     </div>
+    @* <div class="col-md-6"> *@
+    @*     @if (!string.IsNullOrEmpty(Model.ImageFileName)) *@
+    @*     { *@
+    @*         <img height="400px" width="400px" src="~/uploads/@Model.ImageFileName" alt="my img"/> *@
+    @*     } *@
+    @* </div> *@
     <div class="col-md-6">
-        @if (!string.IsNullOrEmpty(Model.ImageFileName))
+        @if (Model.ImageBytes != null)
         {
-            <img height="400px" width="400px" src="~/uploads/@Model.ImageFileName" alt="my img"/>
+            <img height="400px" width="400px" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.ImageBytes)"/>
         }
     </div>
 </div>

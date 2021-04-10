@@ -8,6 +8,7 @@ using WebApplication.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebApplication.Filters;
 
 namespace WebApplication
 {
@@ -75,6 +76,11 @@ namespace WebApplication
                 options.LoginPath = "/Identity/Account/Login";
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
+            });
+            
+            services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add(typeof(BannedActionFilterAttribute));
             });
         }
 

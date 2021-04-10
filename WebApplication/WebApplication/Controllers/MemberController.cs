@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Data;
+using WebApplication.Domain;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
@@ -24,8 +25,9 @@ namespace WebApplication.Controllers
         }
 
         // GET
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            await ImportMembers();
             var members = _context.Members?.ToList();
             return View(members);
         }
@@ -63,12 +65,14 @@ namespace WebApplication.Controllers
 
         public async Task<IActionResult> Delete(int? id)
         {
-            var members = await _context.Members.FindAsync(id);
+            var member = await _context.Members.FindAsync(id);
 
-            if (members != null)
+            if (member != null)
             {
-                _context.Members.Remove(members);
+                _context.Members.Remove(member);
                 await _context.SaveChangesAsync();
+
+                await _userManager.DeleteAsync(await _userManager.FindByEmailAsync(member.Email));
             }
             
             return RedirectToAction(nameof(Index));
@@ -113,6 +117,52 @@ namespace WebApplication.Controllers
                 await _context.AddAsync(member);
             }
             
+            await _context.SaveChangesAsync();
+            
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult MemberIssueBook(int id, string searchString)
+        {
+            var model = new MemberIssueBookModel();
+            var member = _context.Members.Find(id);
+            model.MemberId = member.Id;
+            model.Firstname = member.Firstname;
+            model.Lastname = member.Lastname;
+            model.Email = member.Email;
+            model.BookFound = true;
+            model.DueDate = DateTime.UtcNow.AddDays(7);
+
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                model.Book = _context.Books.SingleOrDefault(x => x.ISBN.ToLower() == searchString.ToLower());
+                if (model.Book != null)
+                {
+                    model.BookId = model.Book.Id;
+                }
+                
+                model.BookFound = model.Book != null;
+            }
+
+            return View(model);
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MemberIssueBook(MemberIssueBookModel model)
+        {
+            var member = await _context.Members.FindAsync(model.MemberId);
+            var book = await _context.Books.FindAsync(model.BookId);
+
+            var issuedBook = new IssuedBook
+            {
+                Book = book, Member = member, IssuedDate = DateTime.UtcNow, ReturnDate = model.DueDate
+            };
+
+            _context.IssuedBook.Add(issuedBook);
+            book.Quantity--;
+
             await _context.SaveChangesAsync();
             
             return RedirectToAction(nameof(Index));

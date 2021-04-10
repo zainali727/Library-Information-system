@@ -230,6 +230,9 @@ namespace WebApplication.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<decimal>("FinePerDay")
+                        .HasColumnType("money");
+
                     b.Property<string>("Genre")
                         .IsRequired()
                         .HasColumnType("nvarchar(250)");
@@ -238,11 +241,14 @@ namespace WebApplication.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<byte[]>("ImageBytes")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("ImageFileName")
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<DateTime>("PublishedDate")
-                        .HasColumnType("dstetime2");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -252,6 +258,9 @@ namespace WebApplication.Data.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ISBN")
+                        .IsUnique();
 
                     b.ToTable("Books");
                 });
@@ -284,6 +293,34 @@ namespace WebApplication.Data.Migrations
                     b.ToTable("BookReviews");
                 });
 
+            modelBuilder.Entity("WebApplication.Models.IssuedBook", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("IssuedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MemberId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("MemberId");
+
+                    b.ToTable("IssuedBook");
+                });
+
             modelBuilder.Entity("WebApplication.Models.Member", b =>
                 {
                     b.Property<int>("Id")
@@ -302,6 +339,9 @@ namespace WebApplication.Data.Migrations
                     b.Property<string>("AddressLine3")
                         .IsRequired()
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<bool>("Banned")
+                        .HasColumnType("bool");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -393,6 +433,17 @@ namespace WebApplication.Data.Migrations
                     b.HasOne("WebApplication.Models.Book", "Book")
                         .WithMany("BookReviews")
                         .HasForeignKey("BookId");
+                });
+
+            modelBuilder.Entity("WebApplication.Models.IssuedBook", b =>
+                {
+                    b.HasOne("WebApplication.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId");
+
+                    b.HasOne("WebApplication.Models.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberId");
                 });
 #pragma warning restore 612, 618
         }

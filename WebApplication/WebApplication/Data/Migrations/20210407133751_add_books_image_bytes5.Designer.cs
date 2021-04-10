@@ -10,8 +10,8 @@ using WebApplication.Data;
 namespace WebApplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201206161905_Changed_String_To_Date")]
-    partial class Changed_String_To_Date
+    [Migration("20210407133751_add_books_image_bytes5")]
+    partial class add_books_image_bytes5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -240,15 +240,17 @@ namespace WebApplication.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<byte[]>("ImageBytes")
+                        .HasColumnType("varbinary(max)");
+
                     b.Property<string>("ImageFileName")
                         .HasColumnType("nvarchar(250)");
 
-                    b.Property<string>("PublishedDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<DateTime>("PublishedDate2")
+                    b.Property<DateTime>("PublishedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -257,6 +259,34 @@ namespace WebApplication.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("WebApplication.Models.BookReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReviewerName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("BookReviews");
                 });
 
             modelBuilder.Entity("WebApplication.Models.Member", b =>
@@ -277,6 +307,9 @@ namespace WebApplication.Data.Migrations
                     b.Property<string>("AddressLine3")
                         .IsRequired()
                         .HasColumnType("nvarchar(250)");
+
+                    b.Property<bool>("Banned")
+                        .HasColumnType("bool");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -361,6 +394,13 @@ namespace WebApplication.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplication.Models.BookReview", b =>
+                {
+                    b.HasOne("WebApplication.Models.Book", "Book")
+                        .WithMany("BookReviews")
+                        .HasForeignKey("BookId");
                 });
 #pragma warning restore 612, 618
         }

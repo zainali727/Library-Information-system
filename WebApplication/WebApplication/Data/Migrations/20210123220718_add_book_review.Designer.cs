@@ -244,7 +244,7 @@ namespace WebApplication.Data.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<DateTime>("PublishedDate")
-                        .HasColumnType("dstetime2");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -269,7 +269,7 @@ namespace WebApplication.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("dstetime2");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ReviewerName")
                         .IsRequired()
