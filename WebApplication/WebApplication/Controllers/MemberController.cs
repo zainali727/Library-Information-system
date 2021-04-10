@@ -125,6 +125,7 @@ namespace WebApplication.Controllers
         {
             var model = new MemberIssueBookModel();
             var member = _context.Members.Find(id);
+            model.MemberId = member.Id;
             model.Firstname = member.Firstname;
             model.Lastname = member.Lastname;
             model.Email = member.Email;
@@ -133,7 +134,11 @@ namespace WebApplication.Controllers
             if (!string.IsNullOrWhiteSpace(searchString))
             {
                 model.Book = _context.Books.SingleOrDefault(x => x.ISBN.ToLower() == searchString.ToLower());
-                model.BookFound = model.Book != null;
+                if (model.Book != null)
+                {
+                    model.BookFound = true;
+                    model.BookId = model.Book.Id;
+                }
             }
 
             return View(model);
@@ -143,19 +148,19 @@ namespace WebApplication.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> MemberIssueBook(MemberIssueBookModel model)
         {
-            if (ModelState.IsValid)
+            var member = await _context.Members.FindAsync(model.MemberId);
+            var book = await _context.Books.FindAsync(model.BookId);
+
+            var issuedBook = new IssuedBook
             {
-                // if (model.Id == 0)
-                //     _context.Add(model);
-                // else
-                //     _context.Update(model);
-                //
-                // await _context.SaveChangesAsync();
-                
-                return RedirectToAction(nameof(Index));
-            }
+                Book = book, Member = member, IssuedDate = DateTime.UtcNow, ReturnDate = DateTime.UtcNow.AddDays(10)
+            };
+
+            _context.IssuedBook.Add(issuedBook);
+
+            await _context.SaveChangesAsync();
             
-            return View(model);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
