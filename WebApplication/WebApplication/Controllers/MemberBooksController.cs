@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication.Data;
-using WebApplication.Models;
+using WebApplication.Domain;
 
 namespace WebApplication.Controllers
 {

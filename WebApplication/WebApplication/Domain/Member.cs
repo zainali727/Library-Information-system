@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace WebApplication.Models
+namespace WebApplication.Domain
 {
     public class Member
     {
@@ -43,11 +43,11 @@ namespace WebApplication.Models
 
         [Column(TypeName = "nvarchar(250)")]
         [EmailAddress, Required]
-        public string  Email { get; set; }
+        public string Email { get; set; }
 
         [Column(TypeName ="nvarchar(250)")]
         [Required]
-        public string  Telephone { get; set; }
+        public string Telephone { get; set; }
         
         [Column(TypeName ="bool")]
         [Required]

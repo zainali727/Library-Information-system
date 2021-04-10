@@ -44,7 +44,7 @@
                     @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Administrator") || User.IsInRole("Manager")))
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="IssuedBooks" asp-action="Index">Issue Books</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="IssuedBooks" asp-action="Index">Issued Books</a>
                         </li>
                     }
 

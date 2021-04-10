@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Http;
 
-namespace WebApplication.Models
+namespace WebApplication.Domain
 {
     public class Book
     {
@@ -39,7 +39,7 @@ namespace WebApplication.Models
         [Column(TypeName ="nvarchar(250)")]
         public string ImageFileName { get; set; }
         
-        [NotMappedAttribute]
+        [NotMapped]
         public IFormFile MyImage { set; get; }
 
         [Column(TypeName = "varbinary(max)")]

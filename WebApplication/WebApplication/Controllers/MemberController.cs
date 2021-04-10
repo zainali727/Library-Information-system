@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Data;
-using WebApplication.Models;
+using WebApplication.Domain;
 
 namespace WebApplication.Controllers
 {

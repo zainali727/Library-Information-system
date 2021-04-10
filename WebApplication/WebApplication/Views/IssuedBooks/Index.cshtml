@@ -1,4 +1,4 @@
-@model IEnumerable<WebApplication.Models.IssuedBook>
+@model IEnumerable<WebApplication.Models.IssuedBookModel>
 
 @{
     ViewData["Title"] = "Issued Books";
@@ -10,16 +10,22 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Book.Title)
+            @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Book.ISBN)
+            @Html.DisplayNameFor(model => model.ISBN)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IssuedDate)
+            @Html.DisplayNameFor(model => model.IssuedTo.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ReturnDate)
+            Issued date
+        </th>
+        <th>
+            Return date
+        </th>
+        <th>
+            Fine
         </th>
     </tr>
     </thead>
@@ -28,16 +34,22 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Book.Title)
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Book.ISBN)
+                @Html.DisplayFor(modelItem => item.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IssuedTo.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IssuedDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CalculatedFine)
             </td>
             @* <td> *@
             @*     <a asp-action="Show" asp-route-id="@item.Id" class="btn btn-outline-success"> *@
