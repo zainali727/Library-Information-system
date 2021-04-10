@@ -25,7 +25,7 @@
             Return date
         </th>
         <th>
-            Fine
+            Fine (£)
         </th>
     </tr>
     </thead>
@@ -43,10 +43,10 @@
                 @Html.DisplayFor(modelItem => item.IssuedTo.Email)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IssuedDate)
+                @item.IssuedDate.ToString("dd/MM/yyyy")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ReturnDate)
+                @item.ReturnDate.ToString("dd/MM/yyyy")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CalculatedFine)

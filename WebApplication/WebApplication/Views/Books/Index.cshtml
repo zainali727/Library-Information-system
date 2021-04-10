@@ -31,6 +31,9 @@
             @Html.DisplayNameFor(model => model.PublishedDate)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
             <a asp-controller="Books" asp-action="AddOrEdit" class="btn btn-outline-success">
                 <i class="far fa-plus-square"></i> Add Book
             </a>
@@ -55,6 +58,9 @@
             </td>
             <td>
                 @item.PublishedDate.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
                 @if (item.Quantity <= 0)

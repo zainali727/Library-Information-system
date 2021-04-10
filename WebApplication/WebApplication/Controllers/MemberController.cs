@@ -157,6 +157,7 @@ namespace WebApplication.Controllers
             };
 
             _context.IssuedBook.Add(issuedBook);
+            book.Quantity--;
 
             await _context.SaveChangesAsync();
             

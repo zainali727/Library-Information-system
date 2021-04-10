@@ -23,12 +23,15 @@ namespace WebApplication.Controllers
         {
             var issuedBooks = (await _context
                 .IssuedBook
+                .Include(x => x.Member)
+                .Include(x => x.Book)
                 .ToListAsync())
                 .Select(x =>
                 {
                     var overdueDays = Convert.ToInt32(Math.Ceiling((DateTime.UtcNow - x.ReturnDate).TotalDays));
                     return new IssuedBookModel
                     {
+                        Id = x.Id,
                         Title = x.Book.Title,
                         ISBN = x.Book.ISBN,
                         IssuedTo = new MemberModel {Id = x.Member.Id, Email = x.Member.Email},
@@ -41,10 +44,19 @@ namespace WebApplication.Controllers
             return View(issuedBooks);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ReturnBook()
+        public async Task<IActionResult> ReturnBook(int? id)
         {
-            throw new NotImplementedException();
+            var issuedBook = _context.IssuedBook.Include(x => x.Book).FirstOrDefault(x => x.Id == id);
+
+            if (issuedBook != null)
+            {
+                _context.IssuedBook.Remove(issuedBook);
+                issuedBook.Book.Quantity++;
+                
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
