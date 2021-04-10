@@ -250,7 +250,7 @@ namespace WebApplication.Data.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<DateTime>("PublishedDate")
-                        .HasColumnType("dstetime2");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");

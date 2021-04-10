@@ -32,7 +32,7 @@ namespace WebApplication.Models
         [Required]
         public string Genre { get; set; }
 
-        [Column(TypeName = "dstetime2")]
+        [Column(TypeName = "datetime2")]
         [Required]
         public DateTime PublishedDate { get; set; }
 

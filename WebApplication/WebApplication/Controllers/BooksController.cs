@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +24,6 @@ namespace WebApplication.Controllers
         }
 
         // GET
-        
         public async Task<IActionResult> Index(string searchString)
         {
             var books = from m in _context.Books.Include(x => x.BookReviews)

@@ -248,7 +248,7 @@ namespace WebApplication.Data.Migrations
                         .HasColumnType("nvarchar(250)");
 
                     b.Property<DateTime>("PublishedDate")
-                        .HasColumnType("dstetime2");
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -291,6 +291,34 @@ namespace WebApplication.Data.Migrations
                     b.HasIndex("BookId");
 
                     b.ToTable("BookReviews");
+                });
+
+            modelBuilder.Entity("WebApplication.Models.IssuedBook", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("IssuedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MemberId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReturnDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("MemberId");
+
+                    b.ToTable("IssuedBook");
                 });
 
             modelBuilder.Entity("WebApplication.Models.Member", b =>
@@ -405,6 +433,17 @@ namespace WebApplication.Data.Migrations
                     b.HasOne("WebApplication.Models.Book", "Book")
                         .WithMany("BookReviews")
                         .HasForeignKey("BookId");
+                });
+
+            modelBuilder.Entity("WebApplication.Models.IssuedBook", b =>
+                {
+                    b.HasOne("WebApplication.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId");
+
+                    b.HasOne("WebApplication.Models.Member", "Member")
+                        .WithMany()
+                        .HasForeignKey("MemberId");
                 });
 #pragma warning restore 612, 618
         }

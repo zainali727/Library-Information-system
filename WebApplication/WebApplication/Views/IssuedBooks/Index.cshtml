@@ -1,0 +1,57 @@
+@model IEnumerable<WebApplication.Models.IssuedBook>
+
+@{
+    ViewData["Title"] = "Issued Books";
+}
+
+<h4>Issued Books</h4>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Book.ISBN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IssuedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IssuedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+            @* <td> *@
+            @*     <a asp-action="Show" asp-route-id="@item.Id" class="btn btn-outline-success"> *@
+            @*         <i class="fa fa-marker fa-lg">Show</i> *@
+            @*     </a> *@
+            @*     <a asp-action="AddOrEdit" asp-route-id="@item.Id" class="btn btn-outline-success"> *@
+            @*         <i class="fa fa-marker fa-lg">Edit</i> *@
+            @*     </a> *@
+            @*     <a asp-action="Delete" asp-route-id="@item.Id" class="text-danger ml-1" *@
+            @*        onclick="return confirm('Are you sure to delete this record?')"> *@
+            @*         <i class="fa fa-trash-alt fa-lg">Delete</i> *@
+            @*     </a> *@
+            @* </td> *@
+        </tr>
+    }
+    </tbody>
+</table>
