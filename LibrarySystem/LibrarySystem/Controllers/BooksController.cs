@@ -22,7 +22,7 @@ namespace LibrarySystem.Controllers
             _context = context;
             _hostingEnvironment = hostingEnvironment;
         }
-
+        //method to carry out function 
         // GET
         public async Task<IActionResult> Index(string searchString)
         {

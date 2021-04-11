@@ -79,6 +79,8 @@ namespace LibrarySystem.Controllers
         }
 
         [HttpPost]
+
+        // bans member 
         public async Task<IActionResult> LockoutMember(Member member)
         {
             var findMember = await _context.Members.FindAsync(member.Id);
@@ -121,7 +123,7 @@ namespace LibrarySystem.Controllers
             
             return RedirectToAction(nameof(Index));
         }
-
+        // issue book get 
         [HttpGet]
         public IActionResult MemberIssueBook(int id, string searchString)
         {
@@ -133,7 +135,8 @@ namespace LibrarySystem.Controllers
             model.Email = member.Email;
             model.BookFound = true;
             model.DueDate = DateTime.UtcNow.AddDays(7);
-
+            
+            // if isbn matches retrieve that book, if it doesn,t it will be null
             if (!string.IsNullOrWhiteSpace(searchString))
             {
                 model.Book = _context.Books.SingleOrDefault(x => x.ISBN.ToLower() == searchString.ToLower());
@@ -159,8 +162,9 @@ namespace LibrarySystem.Controllers
             {
                 Book = book, Member = member, IssuedDate = DateTime.UtcNow, ReturnDate = model.DueDate
             };
-
+            // adds to the db
             _context.IssuedBook.Add(issuedBook);
+            // if a book is taken reduce it by one (stock) 
             book.Quantity--;
 
             await _context.SaveChangesAsync();

@@ -46,7 +46,7 @@ namespace LibrarySystem
             
             services.AddControllersWithViews();
             services.AddRazorPages();
-            
+            //once added you can configure the identity options and you can choose the login and log out settings
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
@@ -70,7 +70,10 @@ namespace LibrarySystem
             services.ConfigureApplicationCookie(options =>
             {
                 // Cookie settings
+                // got from microsoft website 
+                // configures identty
                 options.Cookie.HttpOnly = true;
+                //after 500 minutes you get logged out
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(500);
 
                 options.LoginPath = "/Identity/Account/Login";
@@ -114,7 +117,7 @@ namespace LibrarySystem
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-
+            // this is the administrator
             AddRole(services, "User").Wait();
             CreateUserRoles(services, "Administrator", "admin@admin.com").Wait();
             CreateUserRoles(services, "Manager", "manager@manager.com").Wait();
