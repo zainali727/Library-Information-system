@@ -1,0 +1,116 @@
+@model LibrarySystem.Models.MemberIssueBookModel
+
+@{
+    ViewBag.Title = "Issue book to member";
+    Layout = "_Layout";
+}
+
+<h4>Issue a book to @Model.Firstname @Model.Lastname (@Model.Email)</h4>
+<hr/>
+<form asp-controller="Member" asp-action="MemberIssueBook" method="get">
+    <p>
+        ISBN: <input type="text" name="SearchString">
+        <input type="submit" value="Search"/>
+        @if (!Model.BookFound)
+        {
+            <a class="text-danger ml-1" disabled="">
+                <i class="fa fa-trash-alt fa-lg">Not found!</i>
+            </a>
+        }
+    </p>
+</form>
+<hr/>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="MemberIssueBook" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MemberId"/>
+            <input type="hidden" asp-for="BookId"/>
+
+            @if (Model.Book != null)
+            {
+                <div class="row" style="clear: both">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Book.Title" class="control-label"></label>
+                            <input asp-for="Book.Title" class="form-control" disabled/>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label asp-for="Book.Author" class="control-label"></label>
+                                <input asp-for="Book.Author" class="form-control" disabled/>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label asp-for="Book.ISBN" class="control-label"></label>
+                                <input asp-for="Book.ISBN" class="form-control" disabled/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Book.Genre" class="control-label"></label>
+                            <input asp-for="Book.Genre" class="form-control" disabled/>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Book.PublishedDate" class="control-label"></label>
+                            <input asp-for="Book.PublishedDate" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}" disabled/>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Book.Quantity" class="control-label"></label>
+                            <input asp-for="Book.Quantity" class="form-control" type="number" disabled/>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Book.FinePerDay" class="control-label">Fine Per Day (£)</label>
+                            <input asp-for="Book.FinePerDay" class="form-control" disabled/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        @if (Model.Book.ImageBytes != null)
+                        {
+                            <img height="400px" width="400px" src="data:image/jpeg;base64,@Convert.ToBase64String(@Model.Book.ImageBytes)"/>
+                        }
+                    </div>
+                </div>
+
+                <hr/>
+                
+                <div class="form-group">
+                    <label asp-for="DueDate" class="control-label"></label>
+                    <input asp-for="DueDate" class="form-control" type="date" asp-format="{0:yyyy-MM-dd}"/>
+                    <span asp-validation-for="DueDate" class="text-danger"></span>
+                </div>
+                
+                <div class="form-row">
+                    @if (Model.Book.Quantity <= 0)
+                    {
+                        <div class="form-group col-md-6">
+                            <a class="text-danger ml-1" disabled="">
+                                <i class="fa fa-trash-alt fa-lg">Out of stock!</i>
+                            </a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-group col-md-6">
+                            <input type="submit" value="Issue" class="btn btn-primary btn-block"/>
+                        </div>
+                    }
+                    <div class="form-group col-md-6">
+                        <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i> Back to List</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <hr>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i> Back to List</a>
+                    </div>
+                </div>
+            }
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
