@@ -1,0 +1,81 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@model IEnumerable<LibrarySystem.Models.IssuedBookModel>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <h3 class="display-4">Welcome @User.Identity.Name</h3>
+        var user = UserManager.Users.First(x => x.Email == User.Identity.Name);
+        if (await UserManager.IsInRoleAsync(user, "Administrator") || await UserManager.IsInRoleAsync(user, "Manager"))
+        {
+            <p>Books that are overdue</p>
+        }
+        else
+        {
+            <p>Please view the books that you have on loan</p>
+        }
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ISBN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IssuedTo.Email)
+                </th>
+                <th>
+                    Issued date
+                </th>
+                <th>
+                    Return date
+                </th>
+                <th>
+                    Fine (£)
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ISBN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IssuedTo.Email)
+                    </td>
+                    <td>
+                        @item.IssuedDate.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @item.ReturnDate.ToString("dd/MM/yyyy")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CalculatedFine)
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h1 class="display-4">Welcome</h1>
+        <p>Please <a asp-area="Identity" asp-page="/Account/Login">Login</a> so you can see and loan out books and view which books you have on loan</p>
+    }
+</div>

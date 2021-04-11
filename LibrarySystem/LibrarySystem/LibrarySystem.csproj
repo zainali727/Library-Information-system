@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <UserSecretsId>aspnet-LibrarySystem-CFD2BEB2-5D47-497C-8716-69347725C43C</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.9" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.9" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.9" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.9" />
+        <PackageReference Include="System.Drawing.Common" Version="4.6.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Pages" />
+      <Folder Include="wwwroot\uploads" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Update="wwwroot\css\site.css">
+        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <Content Remove="wwwroot\uploads\Screenshot 2020-11-14 at 02.43.36_f3a2.png" />
+      <Content Remove="wwwroot\uploads\Screenshot 2020-11-14 at 02.43.36_418c.png" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,94 @@
+﻿@model LibrarySystem.Domain.Member
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Member Form</h4>
+<hr/>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="AddOrEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id"/>
+            <div class="form-group">
+                <label asp-for="Firstname" class="control-label"></label>
+                <input asp-for="Firstname" class="form-control"/>
+                <span asp-validation-for="Firstname" class="text-danger"></span>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="Lastname" class="control-label"></label>
+                    <input asp-for="Lastname" class="form-control"/>
+                    <span asp-validation-for="Lastname" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="AddressLine1" class="control-label"></label>
+                    <input asp-for="AddressLine1" class="form-control"/>
+                    <span asp-validation-for="AddressLine1" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="AddressLine2" class="control-label"></label>
+                    <input asp-for="AddressLine2" class="form-control"/>
+                    <span asp-validation-for="AddressLine2" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="AddressLine3" class="control-label"></label>
+                    <input asp-for="AddressLine3" class="form-control"/>
+                    <span asp-validation-for="AddressLine3" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control"/>
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="County" class="control-label"></label>
+                    <input asp-for="County" class="form-control"/>
+                    <span asp-validation-for="County" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="PostCode" class="control-label"></label>
+                    <input asp-for="PostCode" class="form-control"/>
+                    <span asp-validation-for="PostCode" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telephone" class="control-label"></label>
+                <input asp-for="Telephone" class="form-control"/>
+                <span asp-validation-for="Telephone" class="text-danger"></span>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <input type="submit" value="Save" class="btn btn-primary btn-block"/>
+                </div>
+                <div class="form-group col-md-6">
+                    <a asp-action="Index" class="btn btn-secondary btn-block"><i class="fa fa-table"></i> Back to List</a>
+                </div>
+            </div>
+        </form>
+
+        @if (User.IsInRole("Manager"))
+        {
+            <form asp-action="LockoutMember">
+                <input type="hidden" asp-for="Id"/>
+                <input type="hidden" asp-for="Banned" class="form-control"/>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input type="submit" value="@($"{(Model.Banned ? "Unban member" : "Ban member")}")" class="btn btn-danger btn-block"/>
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
