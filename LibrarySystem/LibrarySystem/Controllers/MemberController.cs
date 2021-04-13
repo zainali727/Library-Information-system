@@ -70,6 +70,8 @@ namespace LibrarySystem.Controllers
 
             if (member != null)
             {
+                var issuedBooks = _context.IssuedBook.Where(x => x.Member == member);
+                _context.IssuedBook.RemoveRange(issuedBooks);
                 _context.Members.Remove(member);
                 await _context.SaveChangesAsync();
 
