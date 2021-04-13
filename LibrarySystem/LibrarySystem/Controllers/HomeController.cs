@@ -82,6 +82,8 @@ namespace LibrarySystem.Controllers
         [HttpGet]
         public async Task<IActionResult> MyDetails()
         {
+            await ImportMembersAsync();
+            
             if (!User.Identity.IsAuthenticated)
             {
                 return RedirectToAction(nameof(Index));
@@ -111,6 +113,35 @@ namespace LibrarySystem.Controllers
             }
             
             return View(member);
+        }
+        
+        private async Task<IActionResult> ImportMembersAsync()
+        {
+            var users = _userManager.Users.ToList();
+
+            foreach (var user in users)
+            {
+                var currentMember = _context
+                    .Members
+                    .FirstOrDefault(x => x.Email.ToLower() == user.UserName.ToLower());
+                
+                if(currentMember != null) continue;
+                await _userManager.AddToRoleAsync(user, "User");
+                if(await _userManager.IsInRoleAsync(user, "Administrator") || await _userManager.IsInRoleAsync(user, "Manager")) continue;
+
+                var member = new Member
+                {
+                    Firstname = "", Lastname = "", PostCode = "",
+                    Email = user.UserName,
+                    AddressLine1 = "", AddressLine2 = "", AddressLine3 = "", City = "", County = "", Telephone = ""
+                };
+
+                await _context.AddAsync(member);
+            }
+            
+            await _context.SaveChangesAsync();
+            
+            return RedirectToAction(nameof(Index));
         }
     }
 }

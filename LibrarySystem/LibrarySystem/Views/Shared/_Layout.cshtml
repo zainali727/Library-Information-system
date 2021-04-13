@@ -53,7 +53,7 @@
                     }
 
                     @*everyone else that uses the system cn just see this*@
-                    @if (User.IsInRole("User") && !(User.IsInRole("Administrator") || User.IsInRole("Manager")))
+                    @if (!(User.IsInRole("Administrator") || User.IsInRole("Manager")))
                     {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="MemberBooks" asp-action="Index">Books</a>
