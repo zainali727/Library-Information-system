@@ -21,13 +21,13 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            
+
             <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                 <partial name="_LoginPartial"/>
                 <ul class="navbar-nav flex-grow-1">
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                     
+
                     </li>
                     @* if statements determine what that user can see*@
 
@@ -53,11 +53,13 @@
                     }
 
                     @*everyone else that uses the system cn just see this*@
-
-                    @if (!(User.IsInRole("Administrator") || User.IsInRole("Manager")))
+                    @if (User.IsInRole("User") && !(User.IsInRole("Administrator") || User.IsInRole("Manager")))
                     {
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="MemberBooks" asp-action="Index">Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="MyDetails">My Details</a>
                         </li>
                     }
 

@@ -26,7 +26,6 @@ namespace LibrarySystem.Domain
         public string AddressLine2 { get; set; }
 
         [Column(TypeName = "nvarchar(250)")]
-        [Required]
         public string AddressLine3 { get; set; }
 
         [Column(TypeName = "nvarchar(250)")]

@@ -78,5 +78,39 @@ namespace LibrarySystem.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> MyDetails()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            
+            var member = await _context.Members.SingleOrDefaultAsync(x => x.Email == User.Identity.Name);
+
+            if (member != null)
+            {
+                return View(member);
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> MyDetails(Member member)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Update(member);
+                
+                await _context.SaveChangesAsync();
+                
+                return RedirectToAction(nameof(Index));
+            }
+            
+            return View(member);
+        }
     }
 }
