@@ -7,6 +7,8 @@ using LibrarySystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace LibrarySystem.Controllers
 {
@@ -175,5 +177,18 @@ namespace LibrarySystem.Controllers
             
             return RedirectToAction(nameof(Index));
         }
+    }
+
+    public async Task<IActionResult> Index(string searchString)
+    {
+        var members = from m in _context.Members
+                      select m;
+
+        if (!String.IsNullOrEmpty(searchString))
+        {
+            members = members.Where(s => s.Firstname.Contains(searchString));
+        }
+
+        return View(await members.ToListAsync());
     }
 }
