@@ -27,11 +27,19 @@ namespace LibrarySystem.Controllers
         }
 
         // GET
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
             await ImportMembers();
-            var members = _context.Members?.ToList();
-            return View(members);
+            
+            var members = from m in _context.Members
+                select m;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                members = members.Where(s => s.Firstname.Contains(searchString));
+            }
+
+            return View(await members.ToListAsync());
         }
 
         public IActionResult Show(int id)
@@ -177,18 +185,5 @@ namespace LibrarySystem.Controllers
             
             return RedirectToAction(nameof(Index));
         }
-    }
-
-    public async Task<IActionResult> Index(string searchString)
-    {
-        var members = from m in _context.Members
-                      select m;
-
-        if (!String.IsNullOrEmpty(searchString))
-        {
-            members = members.Where(s => s.Firstname.Contains(searchString));
-        }
-
-        return View(await members.ToListAsync());
     }
 }
