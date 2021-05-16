@@ -36,7 +36,7 @@ namespace LibrarySystem.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                members = members.Where(s => s.Firstname.Contains(searchString));
+                members = members.Where(s => s.Firstname.Contains(searchString) || s.Lastname.Contains(searchString));
             }
 
             return View(await members.ToListAsync());
