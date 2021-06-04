@@ -25,7 +25,7 @@ namespace LibrarySystem.Controllers
             var books = from m in _context.Books.Include(x => x.BookReviews)
                 select m;
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
                 books = books.Where(s => s.Title.Contains(searchString) || s.Author.Contains(searchString) || s.Genre.Contains(searchString));
             }
